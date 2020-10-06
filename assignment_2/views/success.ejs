@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Node Authentication</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+    <style>
+        body {
+            padding-top: 80px;
+            word-wrap: break-word;
+            background-image: url('https://lh3.googleusercontent.com/proxy/508RwhZVqeRdsQ1C6yh5uB-NVG3jQTZr7IXrC9OTtunniKG0ApOvMvoumh7m4PzjEneJ4ycpEmdXzQ4Bu1VxsY-ycMBQN0OfFuclqwsoXfR3GZyRB7E7gA');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        .topic {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="page-header text-center">
+            <h1 class="topic"><span class="fa fa-user"></span> Profile Page</h1>
+            <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
+        </div>
+
+        <div class="row">
+            <!-- GOOGLE INFORMATION -->
+            <div class="col-sm-6">
+                <div class="well">
+                    <h3 class="text-primary">
+                        <span class="fa fa-envelope"></span> Google
+                    </h3>
+
+                    <% if (success) { %>
+                    <div class="alert alert-success alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                        <strong>Success!</strong> Image file is uploaded.
+                    </div>
+                    <%}%>            
+
+                    <p>
+                        <strong>User Name</strong>: <%= name %>
+                    <br />
+                    <strong>Picture of User </strong>:
+                    <img src="<%=pic%>" width="200" height="200" alt="" />
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="well">
+                    <h3 class="text-primary">
+                        <span class="fa fa-cloud-upload"></span> Upload File to Google
+                        Drive
+                    </h3>
+                    <form action="/upload" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input type="file" class="form-control" name="file" required id="" />
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-block btn-success">
+                                Upload File
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</html>
