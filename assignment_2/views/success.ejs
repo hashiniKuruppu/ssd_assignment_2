@@ -37,6 +37,7 @@
                         <span class="fa fa-envelope"></span> Google
                     </h3>
 
+                    <!--Image uploaded successful message-->
                     <% if (success) { %>
                     <div class="alert alert-success alert-dismissible">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
@@ -44,8 +45,9 @@
                     </div>
                     <%}%>            
 
+                    <!--User Details-->
                     <p>
-                        <strong>User Name</strong>: <%= name %>
+                        <strong>User Name</strong>:  <%= name %>
                     <br />
                     <strong>Picture of User </strong>:
                     <img src="<%=pic%>" width="200" height="200" alt="" />
@@ -53,6 +55,7 @@
                 </div>
             </div>
 
+            <!--Image upload segment-->
             <div class="col-sm-6">
                 <div class="well">
                     <h3 class="text-primary">

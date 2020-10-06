@@ -13,6 +13,8 @@ const CLIENT_ID = OAuth2Data.web.client_id
 const CLIENT_SECRET = OAuth2Data.web.client_secret
 const REDIRECT_URI = OAuth2Data.web.redirect_uris[0]
 
+
+//client object
 const oAuth2Client = new google.auth.OAuth2(
     CLIENT_ID,
     CLIENT_SECRET,
@@ -41,12 +43,14 @@ var upload = multer({
 
 }).single("file")
 
-
+//used to upload files to google drive and user details
 const SCOPES = "https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/userinfo.profile"
 
 app.set("view engine", "ejs")
 
 app.get('/', (req, res) => {
+
+    //check user authorization
     if (!authed) {
 
         var url = oAuth2Client.generateAuthUrl({
@@ -59,6 +63,7 @@ app.get('/', (req, res) => {
 
     } else {
 
+        //getting the user information
         var oauth2 = google.oauth2({
 
             auth: oAuth2Client,
@@ -82,11 +87,16 @@ app.get('/', (req, res) => {
 })
 
 app.get('/google/callback', (req, res) => {
+
+    //store authorization code
     const code = req.query.code
 
     if (code) {
 
+        //getting an access token
         oAuth2Client.getToken(code, function (err, tokens) {
+
+            //handling the  error in authentication
             if (err) {
 
                 console.log("Error in Authentication")
@@ -113,6 +123,7 @@ app.get('/google/callback', (req, res) => {
 
 app.post('/upload', (req, res) => {
 
+    //upload the image file after checking the credentials.
     upload(req, res, function (err) {
 
         if (err) throw err
@@ -148,6 +159,8 @@ app.post('/upload', (req, res) => {
 
 })
 
+
+//log out
 app.get('/logout', (req, res) => {
 
     authed = false
@@ -155,6 +168,8 @@ app.get('/logout', (req, res) => {
 
 })
 
+
+//Start the express server on port 5000
 app.listen(5000, () => {
     console.log("App started on Port 5000")
 })
